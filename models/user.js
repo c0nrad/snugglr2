@@ -2,16 +2,15 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  name: String,
-  phone: String,
   GPS: {
-    lat: Number, 
-    lng: Number
+    lat: {default: 20, type: Number}, 
+    lng: {defualt: 21, type: Number}
   },
-  auth: {
-    email: String,
-  },
-  profile: [String] 
+  profile: [String],
+  blocks: [{type: Schema.Types.ObjectId, ref: "Users"}],
+
+  gender: {type: String, enum: ["male", "female"], default: "female"},
+  interested: {type: String, enum: ["male", "female"], default: "male"}
 })
 
 module.exports = mongoose.model('User', UserSchema)
